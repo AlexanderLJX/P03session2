@@ -2,12 +2,14 @@ package com.example.p03session2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 public class MainActivity extends AppCompatActivity {
@@ -47,6 +49,15 @@ public class MainActivity extends AppCompatActivity {
         split.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(amount.getText().toString().isEmpty()||pax.getText().toString().isEmpty()||discount.getText().toString().isEmpty()||payment.getCheckedRadioButtonId()==-1){
+                    Context context = getApplicationContext();
+                    CharSequence text = "error";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    return;
+                }
                 if(gst.isChecked()){
                     gstAmount = 0.07;
                 }else{
